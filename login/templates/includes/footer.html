@@ -1,0 +1,136 @@
+{% load static %}
+
+<footer class="text-center parallax" style="background-color: #333; color: white; padding-top: 500px; bottom: 0; width: 100%; background-image: url('https://colosal-indec-client.s3.amazonaws.com/WEB/banner_contactow.png'); background-attachment: fixed; background-size: cover; position: relative;">
+    <div id="contact-banner" class="contact-banner">
+        <h1 style="text-align: center; padding-left: 15px; padding-right: 15px;">CONTACTO</h1>
+    </div>
+    <div class="container-fluid" id="contact-section">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <br><br><br><br><br><br><br>
+                <p style="padding-left: 15px; padding-right: 15px;">
+                    <strong>OFICINAS ADMINISTRATIVAS</strong><br>
+                    Lunes a jueves 7 a.m. a 12 m y 1:30 a 6 p.m.<br>
+                    Viernes 7 a.m. a 12 m y 1:30 a 5 p.m.<br>
+                    Sábados, domingos y festivos, no se presta servicio.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h5 style="text-align: center; padding-top: 30px;">HORARIOS DE ATENCIÓN :</h5>
+
+                <h5 style="text-align: center; padding-left: 15px; padding-right: 15px;">&nbsp;</h5>
+                <p style="padding-left: 15px; padding-right: 15px;">
+                    <strong>GIMNASIO</strong>
+                    Lunes a Jueves 6 a.m. a 9 p.m. | Viernes 6 a.m. a 8 p.m. | Sábados y Domingos: 6 a.m. a 12 m.<br>
+                    Teléfono: 3788500 ext. 602.<br><br>
+                    <strong>ZONA HÚMEDA</strong><br>
+                    Martes y Miércoles 7 a.m. a 8:30 p.m. | Jueves y Viernes 7 a.m. a 6 p.m. | Sábado, Domingo y festivos 7 a.m. a 5:30 p.m.<br>
+                    Teléfono: 3788500 ext. 603.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <br><br><br><br><br><br><br><br>
+                <h5 style="text-align: center; padding-left: 15px; padding-right: 15px;">&nbsp;</h5>
+                <p style="padding-left: 15px; padding-right: 15px;">
+                    <strong>COORDINACIÓN DEPORTIVA Y ACTIVIDAD FÍSICA</strong><br>
+                    Lunes a jueves de 8 a.m. a 12 m y de 2 p.m. a 6 p.m.<br>
+                    Viernes 8 a.m. a 12 m y de 2 p.m. a 5 p.m.<br>
+                    Teléfono Deportes: 3788500 ext. 605.<br>
+                    Tesorería: 3788500 ext. 606.<br>
+                    <strong>LÍNEAS DE ATENCIÓN:</strong><br>
+                    Fisioterapia: 3788500 ext. 604.<br>
+                    Comunicaciones: 3788500 ext. 609.<br>
+                    Contabilidad: 3788500 ext. 607.
+                </p>
+            </div>
+        </div>
+
+        <!-- Información de contacto -->
+        <div id="contacto" class="row justify-content-between align-items-center" style="padding: 20px 0;">
+            <div class="col-md-4 text-left">
+                <h5 style="text-align: center; padding-left: 15px; padding-right: 15px;">OFICINA</h5>
+                <p style="padding-left: 15px; padding-right: 15px;">
+                    Oficinas Centro Administrativo Indec, edificio contiguo a la pista de patinaje<br>
+                    NIT: 800019147-1 - Código Postal: 55440<br>
+                    Dirección: Carrera 45B Calle 132B sur 112 <br>Caldas, Antioquia – Colombia<br>
+                </p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="https://colosal-indec-client.s3.amazonaws.com/WEB/logo_gris.png" alt="Logo" class="custom-img" style="margin: 20px auto;">
+            </div>
+            <div class="col-md-4 text-right">
+                <h5 style="text-align: center; padding-left: 15px; padding-right: 15px;">CONTACTO</h5>
+                <p style="padding-left: 15px; padding-right: 15px;">
+                    Instituto de Deporte y Recreación de Caldas <strong>INDEC</strong><br>
+                    Correo electrónico: contactenos@indeccaldas.gov.co<br>
+                    Correo electrónico para Notificaciones Judiciales: notificacionesjudiciales@indeccaldas.gov.co<br>
+                    Teléfono Oficinas Administrativas: 3788500 ext. 601<br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function adjustContactBanner() {
+        var contactSection = document.querySelector("#contact-section");
+        var contactBanner = document.getElementById("contact-banner");
+        var contactSectionTop = contactSection.offsetTop;
+        contactBanner.style.top = (contactSectionTop - contactBanner.offsetHeight - 20) + "px";
+    }
+
+    window.onload = adjustContactBanner;
+    window.onresize = adjustContactBanner;
+</script>
+
+<style>
+    .parallax {
+        background-attachment: fixed;
+        background-position: center;
+        width: 100%;
+        height: auto;
+        overflow-x: hidden; /* Evitar desbordamiento horizontal */
+    }
+    footer .container-fluid {
+        background-color: rgba(51, 51, 51, 0.9);
+        padding: 20px 0;
+        position: relative;
+        z-index: 2; /* Asegura que el contenido esté por encima del banner */
+    }
+    footer h5, footer h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    footer p {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        text-align: justify;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .contact-banner {
+        position: absolute; 
+        left: 0; 
+        background-color: white; 
+        color: black; 
+        padding: 10px 20px; 
+        border-radius: 5px; 
+        clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+        z-index: 1; 
+    }
+    .custom-img {
+        display: block;
+        max-width: 100px;
+        margin: 20px auto;
+    }
+</style>
