@@ -1,0 +1,184 @@
+/* main.css */
+
+/* Estilos Generales */
+body {
+    font-family: 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333; /* Cambia el fondo a un color oscuro para que los botones se vean bien */
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-link {
+    color: white !important; /* Cambiar el color del texto de los botones a blanco */
+    background-color: #007bff; /* Cambia el color de fondo de los botones a azul (puedes ajustar este color) */
+    border-radius: 20px;
+    margin: 5px;
+    padding: 5px 15px;
+}
+
+.nav-link:hover {
+    background-color: #0056b3; /* Color de fondo más oscuro en hover */
+    text-decoration: none;
+}
+
+.nav-item.active .nav-link {
+    font-weight: bold;
+}
+
+/* Footer */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+}
+
+footer .container-fluid {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+
+footer h5, footer h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+footer p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: justify;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.contact-banner {
+    position: absolute;
+    left: 0;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+    z-index: 1;
+}
+
+.custom-img {
+    display: block;
+    max-width: 100px;
+    margin: 20px auto;
+}
+
+/* Menú Lateral */
+.offcanvas-collapse.WEB {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1045;
+    width: 300px;
+    padding: 2rem;
+    overflow-y: auto;
+    background-color: #343a40;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    color: white;
+}
+
+.offcanvas-collapse.WEB.open {
+    transform: translateX(0);
+}
+
+.offcanvas-nav.WEB .nav-item {
+    margin: 0;
+}
+
+.offcanvas-nav.WEB .nav-linkMENU {
+    color: black !important;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    background-color: white;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.offcanvas-nav.WEB .nav-linkMENU:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.offcanvas-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+    z-index: 1050;
+}
+body {
+    font-family: 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Sombra y estilos generales del contenedor de login */
+.login-container {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 150px; /* Ajusta este valor según la altura de tu navbar */
+}
+
+/* Estilos para el título y las etiquetas */
+h1, label {
+    font-family: 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+}
+
+/* Estilo del texto de los placeholders */
+input::placeholder {
+    color: #888;
+}
+
+/* Estilo para el botón de enviar */
+.btn-dark {
+    background-color: #333;
+    border-color: #333;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-dark:hover {
+    background-color: #555;
+    border-color: #555;
+}
+
+/* Estilo para los enlaces */
+a {
+    color: #0071e3;
+}
+
+a:hover {
+    text-decoration: underline;
+}

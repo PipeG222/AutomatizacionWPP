@@ -1,165 +1,29 @@
 {% load static %}
-<style>
-    .navbar-toggler {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
-    .navbar-toggler-icon {
-        display: none; /* Ocultar el icono de toggler predeterminado */
-    }
-    .navbar {
-        background-color: rgba(0, 0, 0, 0); /* Fondo transparente */
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000; /* Asegúrate de que el navbar esté encima del contenido */
-    }
-    .nav-link {
-        color: black !important;
-    }
-    .nav-item.active .nav-link {
-        font-weight: bold;
-    }
-    .navbar-brand {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .navbar-collapse {
-        justify-content: space-between;
-    }
-    .navbar-nav .nav-item .nav-link {
-        color: black;
-        background-color: white;
-        border-radius: 20px;
-        margin: 5px;
-        padding: 5px 15px;
-    }
-    .offcanvas-collapse.WEB {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1045;
-        width: 300px;
-        padding: 2rem;
-        overflow-y: auto;
-        background-color: #343a40;
-        transition: transform 0.3s ease-in-out;
-        transform: translateX(-100%);
-        color: white;
-    }
-    .offcanvas-collapse.WEB.open {
-        transform: translateX(0);
-    }
-    .offcanvas-nav.WEB .nav-item {
-        margin: 0; /* Eliminar margen entre los ítems */
-    }
-    .offcanvas-nav.WEB .nav-linkMENU {
-        color: black !important;
-        padding: 12px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Borde solo en la parte inferior */
-        border-radius: 0; /* Sin bordes redondeados */
-        background-color: white; /* Fondo blanco */
-        text-decoration: none; /* Quitar subrayado */
-        width: 100%; /* Ancho del 100% */
-        display: block;
-        text-align: center;
-    }
-    .offcanvas-nav.WEB .nav-linkMENU:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-        text-decoration: none; /* Quitar subrayado al pasar el ratón */
-    }
-    .offcanvas-close {
-        position: absolute;
-        top: 5px; /* Mover más arriba */
-        right: 10px;
-        font-size: 1.5em;
-        color: white;
-        cursor: pointer;
-        z-index: 1050; /* Asegurarse de que esté por encima de otros elementos */
-    }
-    .home-content {
-        margin-top: 100px; /* Ajusta el margen superior para que el contenido no se solape con el navbar */
-    }
-</style>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <!-- Botón para expandir/cerrar el menú lateral -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);" onclick="toggleOffcanvas();">
-                    <i class="fas fa-bars"></i>
-                </a>
-            </li>
-        </ul>
-
-
-        <!-- Menú de navegación principal -->
+        <a class="navbar-brand" href="#">Mi Proyecto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <!-- Menú izquierda -->
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">NOSOTROS</a>
+                    <a class="nav-link" href="{% url 'home' %}">home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">TRANSPARENCIA</a>
+                    <a class="nav-link" href="{% url 'products' %}">products</a>
                 </li>
-            </ul>
-
-            <ul class="navbar-nav ml-auto">
-                <!-- Menú derecha -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">ATENCIÓN CIUDADANA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">PAGOS EN LÍNEA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://auth-indec.auth.us-east-1.amazoncognito.com/login?client_id=5rn96qeg0j4a792nqt3gm87o9v&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fintranet.indeccaldas.gov.co%2Fintr4net%2F">
-                        <i class="fas fa-user"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Más
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'products' %}">home</a>
+                        <a class="dropdown-item" href="{% url 'products' %}">products</a>
+                        <a class="dropdown-item" href="{% url 'login' %}">login</a>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
-<!-- Menú lateral desplegable -->
-<div class="offcanvas-collapse WEB" id="offcanvasMenu">
-    <span class="offcanvas-close" onclick="toggleOffcanvas();">&times;</span>
-    <ul class="navbar-nav offcanvas-nav WEB">
-        <li class="nav-item">
-            <a class="nav-linkMENU" href="{% url 'home' %}">INICIO</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-linkMENU" href="{% url 'home' %}">NOSOTROS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-linkMENU" href="#">
-                <i class="fas fa-sign-in-alt"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-<!-- jQuery, Popper.js, and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script>
-    function toggleOffcanvas() {
-        $('#offcanvasMenu').toggleClass('open');
-    }
-
-    $(document).ready(function(){
-        $('.navbar-toggler').on('click', function(){
-            toggleOffcanvas();
-        });
-    });
-</script>
-
