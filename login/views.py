@@ -14,24 +14,22 @@ def products(request):
     return render (request,"products.html")
 
 def login_view(request):
-    if request.user.is_authenticated:
-        return redirect(reverse('home'))
     
-    else:
-        if request.method == "POST":
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username = username,password = password)
+    
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username,password = password)
             
-            if user is not None:
-                login(request,user)
-                return redirect(reverse('home'))
-            else:
-                messages.success(request,('Error al iniciar sesión'))
-                return redirect(reverse('login'))
+        if user is not None:
+            login(request,user)
+            return redirect(reverse('home'))
+        else:
+            messages.success(request,('Error al iniciar sesión'))
+            return redirect(reverse('login'))
         
-        if request.method == "GET":
-            return render(request,'login.html')
+    if request.method == "GET":
+        return render(request,'login.html')
 
 
 def logout_view(request):
