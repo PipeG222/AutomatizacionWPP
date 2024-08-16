@@ -1,71 +1,84 @@
 {% load static %}
-
+{% load widget_tweaks %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>login</title>
+        <title>register</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
+    <body>
+        <div class="container login-container">
+            {% if request.user.is_authenticated %}
+                <h1 class="text-center mb-4">Ya estás autenticado</h1>
+                <div class="text-center">
+                    <p>Has iniciado sesión como <strong>{{ request.user.username }}</strong>.</p>
+                    <a href="{% url 'logout' %}" class="btn btn-dark">Cerrar Sesión</a>
+                </div>
+            {% else %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning mt-5 pt-3 mx-auto w-50 text-center" role="alert">
+                            Error al registrarse, por favor intente de nuevo
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body">
+                                    <h3 class="text-center mb-4">Registrarse</h3>
+                                    <div class="alert alert-info" role="alert">
+                                        La contraseña debe tener al menos 6 caracteres y no debe ser completamente numérica.
+                                    </div>
+                                    <form method="post" action="{% url 'register' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group mb-4">
+                                            <label for="username">Nombre usuario</label>
+                                            <br>
+                                            {{ formulario.username|add_class:"form-control" }}
+                                        </div>
 
-    <div class="container login-container">
+                                        <div class="form-group mb-4">
+                                            <label for="email">Correo electrónico</label>
+                                            <br>
+                                            {{ formulario.email|add_class:"form-control" }}
+                                        </div>
 
-        {% if request.user.is_authenticated %}
-            <h1 class="text-center mb-4">Ya estás autenticado</h1>
-            <div class="text-center">
-                <p>Has iniciado sesión como <strong>{{ request.user.username }}</strong>.</p>
-                <a href="{% url 'logout' %}" class="btn btn-dark">Cerrar Sesión</a>
-            </div>
+                                        <div class="form-group mb-4">
+                                            <label for="password1">Contraseña</label>
+                                            <br>
+                                            {{ formulario.password1|add_class:"form-control" }}
+                                        </div>
 
-        {% else %}
+                                        <div class="form-group mb-4">
+                                            <label for="password2">Confirmar contraseña</label>
+                                            <br>
+                                            {{ formulario.password2|add_class:"form-control" }}
+                                        </div>
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>¡Error al iniciar sesión!</strong> Por favor intente de nuevo.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            <h1 class="text-center mb-4">Registro de usuario</h1>
-            <div class="container mt-5">
-                <h2 class="text-center">Registro</h2>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <form method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="id_username">Nombre de usuario</label>
-                                {{ formulario.username }}
+                                        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                                        <div class="form-group mb-4 text-center">
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="id_email">Correo electrónico</label>
-                                {{ formulario.email }}
-                            </div>
-                            <div class="form-group">
-                                <label for="id_password1">Contraseña</label>
-                                {{ formulario.password1 }}
-                            </div>
-                            <div class="form-group">
-                                <label for="id_password2">Confirmar contraseña</label>
-                                {{ formulario.password2 }}
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
-    </div>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        {% endif %}
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </div>
+                
+            {% endif %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-XXXXX" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-XXXXX" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-XXXXX" crossorigin="anonymous"></script>
+    </body>
 </html>
-    
 {% endblock %}
