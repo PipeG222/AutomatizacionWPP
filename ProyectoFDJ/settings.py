@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'login',
     'agenda',
+    'ProyectoFDJ',
 ]
 
 MIDDLEWARE = [
@@ -66,10 +68,18 @@ WSGI_APPLICATION = 'ProyectoFDJ.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2cbteov8hgmgu',
+        'USER': 'u90l3oed8k1dbb',
+        'PASSWORD': 'p47183cf02490d3df7d8eb640f7243d52ed38e0836a8d21e844383aa6600ff5f5',
+        'HOST': 'cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 
 # Password validation
@@ -115,5 +125,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # redireccion de login y logout
-LOGIN_REDIRECT_URL='products'
+LOGIN_REDIRECT_URL = '/barberia/products/'
 LOGOUT_REDIRECT_URL='home'

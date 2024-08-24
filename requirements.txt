@@ -4,3 +4,5 @@ Django==4.2.14
 django-widget-tweaks==1.5.0
 sqlparse==0.5.1
 typing-extensions==4.12.2
+psycopg2-binary==2.9.9
+Pillow==10.4.0
