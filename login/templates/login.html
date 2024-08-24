@@ -21,15 +21,15 @@
             {% else %}
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-warning" role="alert">
-                            Error al iniciar sesión, porfavor intente de nuevo
+                        <div class="alert alert-warning mt-5 pt-3 mx-auto w-50 text-center" role="alert">
+                            Error al iniciar sesión, por favor intente de nuevo
                         </div>
                     {% endfor %}
                 {% endif %}
                 <div class="container mt-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="card">
+                            <div class="card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <h3 class="text-center mb-4">Iniciar Sesión</h3>
                                     <form method="post" action="{% url 'login' %}">
@@ -44,7 +44,6 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
                                         <div class="form-group mb-4 text-center">
-                                            <a href="#" class="text-muted">¿Olvidaste tu usuario o contraseña?</a>
                                         </div>
                                         <div class="text-center mt-4">
                                             <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Crea una ahora</a></p>

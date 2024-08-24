@@ -25,7 +25,7 @@ def login_view(request):
             login(request,user)
             return redirect(reverse('home'))
         else:
-            messages.success(request,('Error al iniciar sesión'))
+            messages.error(request,('Error al iniciar sesión'))
             return redirect(reverse('login'))
         
     if request.method == "GET":
@@ -37,17 +37,21 @@ def logout_view(request):
     return redirect(reverse('login'))
 
 
-def register_view(request): 
+def register_view(request):
     if request.method == 'POST':
         formulario = FormularioRegistro(request.POST)
 
         if formulario.is_valid():
             usuario = formulario.save()
-            login(request,usuario)
+            login(request, usuario)
             return redirect(reverse('home'))
-    
+        else:
+            messages.error(request, 'Error al registrarse, por favor intente de nuevo.')
+            return redirect(reverse('register'))
+
     elif request.method == 'GET':
         formulario = FormularioRegistro()
-    
-    return render(request,'register.html',{'formulario':formulario})
+
+    return render(request, 'register.html', {'formulario': formulario})
+
         
