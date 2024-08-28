@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'login',
     'agenda',
     'ProyectoFDJ',
+    'superadmin',
 ]
 
 MIDDLEWARE = [

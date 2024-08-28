@@ -1,0 +1,75 @@
+{% extends "base_superadmin.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="container d-flex flex-wrap justify-content-start">
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'empresas.png' %}" alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Empresas</h5>
+            <p class="card-text">Acerca de empresas, las cuales contienen uno ó más negocios.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'negocios.png' %}" alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Negocios</h5>
+            <p class="card-text">Negocios pertenecientes a cierta empresa.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'servicios.png' %}" alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Servicios</h5>
+            <p class="card-text">Servicios que ofrece cierto negocio.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'usuarios.png' %}" alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Usuarios</h5>
+            <p class="card-text">Empleados de cierto negocio que usaran el sistema.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'clientes.png' %}"  alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Clientes</h5>
+            <p class="card-text">Clientes de cierto negocio.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'citas.png' %}"  alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Citas</h5>
+            <p class="card-text">Citas asignadas a dado usuario.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+    <div class="card text-center mb-3 mx-2" style="width: 20rem;">
+        <div class="card-body">
+            <img src="{% static 'notificaciones.png' %}"  alt="Logo" class="mb-2" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+            <h5 class="card-title">Notificaciones</h5>
+            <p class="card-text">Notificaciones a usuarios.</p>
+            <a href="#" class="btn btn-success">Ir ahora</a>
+        </div>
+    </div>
+
+
+    
+</div>
+
+{% endblock content %}
