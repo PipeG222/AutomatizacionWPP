@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-bxb1w*cdn544d!u%oo1uq-hvyk)b0e540-$j&6^sljh4y(g2@l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,6 +75,8 @@ DATABASES = {
         'PASSWORD': 'p47183cf02490d3df7d8eb640f7243d52ed38e0836a8d21e844383aa6600ff5f5',
         'HOST': 'cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 MEDIA_URL = '/media/'
