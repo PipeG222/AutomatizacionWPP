@@ -1,0 +1,164 @@
+{% extends 'base_superadmin.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="min-height: 80vh; margin-top: 20px; margin-bottom: 20px;">
+    <h1 class="text-center">Gestión de Empresas</h1>
+
+    <!-- Botón para abrir el modal de crear empresa -->
+    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#crearEmpresaModal">Crear Empresa</button>
+    
+    <!-- Tabla para mostrar las empresas -->
+    <div class="table-responsive">
+        <table class="table table-striped" id="empresasTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empresa in empresas %}
+                <tr>
+                    <td>{{ empresa.emp_nombre }}</td>
+                    <td>{{ empresa.emp_direccion }}</td>
+                    <td>{{ empresa.emp_telefono }}</td>
+                    <td>{{ empresa.emp_email }}</td>
+                    <td>
+                        <!-- Botón para editar empresa -->
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editarEmpresaModal"
+                            data-id="{{ empresa.emp_id }}" data-nombre="{{ empresa.emp_nombre }}"
+                            data-direccion="{{ empresa.emp_direccion }}" data-telefono="{{ empresa.emp_telefono }}"
+                            data-email="{{ empresa.emp_email }}">Editar</button>
+
+                        <!-- Botón para eliminar empresa -->
+                        <a href="?delete_id={{ empresa.emp_id }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta empresa?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para crear una nueva empresa -->
+<div class="modal fade" id="crearEmpresaModal" tabindex="-1" role="dialog" aria-labelledby="crearEmpresaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearEmpresaModalLabel">Crear Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'empresas_superadmin' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="emp_nombre">Nombre</label>
+                        <input type="text" class="form-control" id="emp_nombre" name="emp_nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_direccion">Dirección</label>
+                        <input type="text" class="form-control" id="emp_direccion" name="emp_direccion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="emp_telefono" name="emp_telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_email">Email</label>
+                        <input type="email" class="form-control" id="emp_email" name="emp_email" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar una empresa -->
+<div class="modal fade" id="editarEmpresaModal" tabindex="-1" role="dialog" aria-labelledby="editarEmpresaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarEmpresaModalLabel">Editar Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'empresas_superadmin' %}">
+                {% csrf_token %}
+                <input type="hidden" id="emp_id" name="emp_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="emp_nombre">Nombre</label>
+                        <input type="text" class="form-control" id="editar-emp_nombre" name="emp_nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_direccion">Dirección</label>
+                        <input type="text" class="form-control" id="editar-emp_direccion" name="emp_direccion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="editar-emp_telefono" name="emp_telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp_email">Email</label>
+                        <input type="email" class="form-control" id="editar-emp_email" name="emp_email" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery, Popper.js, and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+<script>
+    // Inicializar DataTable
+    $(document).ready(function() {
+        $('#empresasTable').DataTable({
+            responsive: true,
+            autoWidth: false
+        });
+    });
+
+    // Manejar la apertura del modal de edición y prellenar los campos
+    $('#editarEmpresaModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);  // Botón que disparó el modal
+        var id = button.data('id');
+        var nombre = button.data('nombre');
+        var direccion = button.data('direccion');
+        var telefono = button.data('telefono');
+        var email = button.data('email');
+
+        // Actualizar los campos del modal con los datos de la empresa
+        var modal = $(this);
+        modal.find('#emp_id').val(id);
+        modal.find('#editar-emp_nombre').val(nombre);
+        modal.find('#editar-emp_direccion').val(direccion);
+        modal.find('#editar-emp_telefono').val(telefono);
+        modal.find('#editar-emp_email').val(email);
+    });
+</script>
+{% endblock %}
