@@ -1,0 +1,193 @@
+{% extends 'base_superadmin.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="min-height: 80vh; margin-top: 20px; margin-bottom: 20px;">
+    <h1 class="text-center">Gestión de Negocios</h1>
+
+    <!-- Botón para abrir el modal de crear negocio -->
+    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#crearNegocioModal">Crear Negocio</button>
+    
+    <!-- Tabla para mostrar los negocios -->
+    <div class="table-responsive">
+        <table class="table table-striped" id="negociosTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Empresa</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for negocio in negocios %}
+                <tr>
+                    <td>{{ negocio.neg_nombre }}</td>
+                    <td>{{ negocio.neg_tipo }}</td>
+                    <td>{{ negocio.neg_direccion }}</td>
+                    <td>{{ negocio.neg_telefono }}</td>
+                    <td>{{ negocio.neg_email }}</td>
+                    <td>{{ negocio.neg_emp.emp_nombre }}</td>
+                    <td>
+                        <!-- Botón para editar negocio -->
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editarNegocioModal"
+                            data-id="{{ negocio.neg_id }}" data-empresa="{{ negocio.neg_emp_id }}"
+                            data-nombre="{{ negocio.neg_nombre }}" data-tipo="{{ negocio.neg_tipo }}"
+                            data-direccion="{{ negocio.neg_direccion }}" data-telefono="{{ negocio.neg_telefono }}"
+                            data-email="{{ negocio.neg_email }}">Editar</button>
+
+                        <!-- Botón para eliminar negocio -->
+                        <a href="?delete_id={{ negocio.neg_id }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este negocio?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Modal para crear un nuevo negocio -->
+<div class="modal fade" id="crearNegocioModal" tabindex="-1" role="dialog" aria-labelledby="crearNegocioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearNegocioModalLabel">Crear Negocio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'negocios_superadmin' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="neg_emp">Empresa</label>
+                        <!-- El campo select ya debería incluir "Seleccionar" como la primera opción -->
+                        {{ form.neg_emp }}
+                    </div>
+                    <div class="form-group">
+                        <label for="neg_nombre">Nombre</label>
+                        <input type="text" class="form-control" id="neg_nombre" name="neg_nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neg_tipo">Tipo</label>
+                        <input type="text" class="form-control" id="neg_tipo" name="neg_tipo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neg_direccion">Dirección</label>
+                        <input type="text" class="form-control" id="neg_direccion" name="neg_direccion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neg_telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="neg_telefono" name="neg_telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neg_email">Email</label>
+                        <input type="email" class="form-control" id="neg_email" name="neg_email" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar un negocio -->
+<div class="modal fade" id="editarNegocioModal" tabindex="-1" role="dialog" aria-labelledby="editarNegocioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarNegocioModalLabel">Editar Negocio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'negocios_superadmin' %}">
+                {% csrf_token %}
+                <input type="hidden" id="neg_id" name="neg_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="editar_neg_emp">Empresa</label>
+                        <select class="form-control" id="editar_neg_emp" name="neg_emp" required>
+                            {% for empresa in form.fields.neg_emp.queryset %}
+                                <option value="{{ empresa.id }}">{{ empresa.emp_nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar_neg_nombre">Nombre</label>
+                        <input type="text" class="form-control" id="editar_neg_nombre" name="neg_nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar_neg_tipo">Tipo</label>
+                        <input type="text" class="form-control" id="editar_neg_tipo" name="neg_tipo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar_neg_direccion">Dirección</label>
+                        <input type="text" class="form-control" id="editar_neg_direccion" name="neg_direccion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar_neg_telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="editar_neg_telefono" name="neg_telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar_neg_email">Email</label>
+                        <input type="email" class="form-control" id="editar_neg_email" name="neg_email" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery, Popper.js, and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+<script>
+    // Inicializar DataTable
+    $(document).ready(function() {
+        $('#negociosTable').DataTable({
+            responsive: true,
+            autoWidth: false
+        });
+    });
+
+    // Manejar la apertura del modal de edición y prellenar los campos
+    $('#editarNegocioModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);  // Botón que disparó el modal
+        var id = button.data('id');
+        var empresa = button.data('empresa');
+        var nombre = button.data('nombre');
+        var tipo = button.data('tipo');
+        var direccion = button.data('direccion');
+        var telefono = button.data('telefono');
+        var email = button.data('email');
+
+        // Actualizar los campos del modal con los datos del negocio
+        var modal = $(this);
+        modal.find('#neg_id').val(id);
+        modal.find('#editar_neg_emp').val(empresa);
+        modal.find('#editar_neg_nombre').val(nombre);
+        modal.find('#editar_neg_tipo').val(tipo);
+        modal.find('#editar_neg_direccion').val(direccion);
+        modal.find('#editar_neg_telefono').val(telefono);
+        modal.find('#editar_neg_email').val(email);
+    });
+</script>
+{% endblock %}
