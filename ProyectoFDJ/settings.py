@@ -63,22 +63,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ProyectoFDJ.wsgi.application'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd2cbteov8hgmgu',
-        'USER': 'u90l3oed8k1dbb',
-        'PASSWORD': 'p47183cf02490d3df7d8eb640f7243d52ed38e0836a8d21e844383aa6600ff5f5',
-        'HOST': 'cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd2cbteov8hgmgu',
+#         'USER': 'u90l3oed8k1dbb',
+#         'PASSWORD': 'p47183cf02490d3df7d8eb640f7243d52ed38e0836a8d21e844383aa6600ff5f5',
+#         'HOST': 'cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
